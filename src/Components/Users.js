@@ -1,18 +1,20 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import axios from 'axios';
-import { MenuItem, Link, MenuList } from '@material-ui/core';
 import User from './User';
+import { Collapse,Row,Col } from 'antd';
+import 'antd/dist/antd.css';
+const {Panel}=Collapse
 
-const USER_SERVICE_URL = 'https://jsonplaceholder.typicode.com/users';
+const USERS_URL = 'https://jsonplaceholder.typicode.com/users';
 
 function Users() {
-  const [data, setdata] = useState([]);
-  const [state, setstate] = useState(false);
+  const [users, setusers] = useState([]);
+  
 
   async function fetchData() {
     await axios
-      .get(USER_SERVICE_URL)
-      .then(res => setdata(res.data))
+      .get(USERS_URL)
+      .then(res => setusers(res.data))
       .catch(err => console.log(err));
   }
 
@@ -20,30 +22,35 @@ function Users() {
     fetchData();
   }, []);
 
-  if (data.length === 0) {
+  if (users.length === 0) {
     return 'loading';
   }
 
-  function hideModal() {
-    setstate(false);
-  }
-
-  const showModal = () => {
-    setstate(true);
-  };
-
-  console.log('state', state);
-
   return (
-    <div>
-      <MenuList>
-        {data.map(item => (
-          <MenuItem onClick={() => setstate(!state)}>
-            {item.name}
-            <User show={state} id={item.id} handleClose={hideModal} />
-          </MenuItem>
-        ))}
-      </MenuList>
+    // <div>
+    //   <h1>Welcome to user-app!</h1>
+    //   {/* <MenuList>
+    //     {users.map(item => (
+    //       <User userId={item.id} />
+    //     ))}
+    //   </MenuList> */}
+    //   {users.map(item=>(
+    //     <User userId={item.id} />
+    //   ))}
+    // </div>
+    
+    <div className="gutter-example">
+      <Row type="flex" justify="start">
+        {
+          users.map(item=>(
+            <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }}>
+              <div className="gutter-box">
+                <User userId={item.id} />
+              </div>              
+            </Col>
+          ))
+        }
+      </Row>
     </div>
   );
 }
