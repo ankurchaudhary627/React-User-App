@@ -1,15 +1,15 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import User from './User';
-import { Collapse,Row,Col } from 'antd';
+import { BrowserRouter,Switch,Route,useHistory,withRouter,Link } from 'react-router-dom';
+import { Row,Col, Card, Menu, List } from 'antd';
 import 'antd/dist/antd.css';
-const {Panel}=Collapse
 
 const USERS_URL = 'https://jsonplaceholder.typicode.com/users';
 
 function Users() {
   const [users, setusers] = useState([]);
-  
+  let history = useHistory();
 
   async function fetchData() {
     await axios

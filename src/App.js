@@ -25,12 +25,3 @@ function App() {
 }
 
 export default App;
-
-{
-  /* <div className='App'>
-      <A href='/'>Home Page</A>
-      <br />
-      <A href='/users'>Users Page</A>
-      {routeRes}
-    </div> */
-}
