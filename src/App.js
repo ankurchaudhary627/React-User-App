@@ -44,7 +44,7 @@ function App() {
             <Route path='/users' render={() => <Users />} />
           {/* <div style={{ background: '#fff', padding: 24, minHeight: 280 }}>Content</div> */}
         </Content>
-        <Footer style={{ textAlign: 'center' }}>User App ©2020 Created by Goku007</Footer>
+        <Footer style={{ textAlign: 'center' }}>User App ©2020 Created by g0ku007</Footer>
       </Layout>
     </BrowserRouter>
 

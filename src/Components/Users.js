@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import User from './User';
 import { BrowserRouter,Switch,Route,useHistory,withRouter,Link } from 'react-router-dom';
-import { Row,Col, Card, Menu, List } from 'antd';
-import { Pagination } from 'antd';
+import { Row,Col, Card, Button, Icon } from 'antd';
+import { Pagination,Modal } from 'antd';
 import 'antd/dist/antd.css';
+
+const { Meta } = Card;
 
 const USERS_URL = 'https://jsonplaceholder.typicode.com/users';
 
@@ -13,6 +15,7 @@ function Users() {
   const [users, setusers] = useState([]);
   const [pageState, setpageState] = useState(1)
   const [currUsers, setcurrUsers] = useState([])
+  const [visible, setvisible] = useState(false)
 
   console.log('users',users)
   console.log('curr users',currUsers)
@@ -74,20 +77,18 @@ function Users() {
     
     <div className="gutter-example" >
       <center><h1>Welcome to user-app!</h1></center>
-      {console.log('pagestate',pageState)}
-      {console.log('curr-users',currUsers)}
+      <br/>
       <Row type="flex" justify="start">
-        {/* {currUsers.length==0? "loading"
-          : */}
           {
           currUsers.map(item=>(
             <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }}>
-              <div className="gutter-box">
+              {/* <div className="gutter-box">
                 <p>{item.name}</p>
                 <p>{item.email}</p>
                 <p>{item.phone}</p>
                 <p>{item.website}</p>
-              </div>              
+              </div>               */}
+              <User user={item} />
             </Col>
           ))
         }
