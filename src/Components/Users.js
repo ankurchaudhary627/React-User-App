@@ -3,14 +3,20 @@ import axios from 'axios';
 import User from './User';
 import { BrowserRouter,Switch,Route,useHistory,withRouter,Link } from 'react-router-dom';
 import { Row,Col, Card, Menu, List } from 'antd';
+import { Pagination } from 'antd';
 import 'antd/dist/antd.css';
 
 const USERS_URL = 'https://jsonplaceholder.typicode.com/users';
 
 function Users() {
+  const userPerPage=3
   const [users, setusers] = useState([]);
-  let history = useHistory();
+  const [pageState, setpageState] = useState(1)
+  const [currUsers, setcurrUsers] = useState([])
 
+  console.log('users',users)
+  console.log('curr users',currUsers)
+  
   async function fetchData() {
     await axios
       .get(USERS_URL)
@@ -18,14 +24,26 @@ function Users() {
       .catch(err => console.log(err));
   }
 
+  function onChangePage (page) {
+    console.log(page);
+    setpageState(page)
+    const last=page*userPerPage
+    const first=last-userPerPage
+    setcurrUsers(users.slice(first,last))
+  };
+  
   useEffect(() => {
-    fetchData();
-  }, []);
+    fetchData()
+  }, [])
+
+  useEffect(() => {
+    setcurrUsers(users.slice(0,3))
+  }, [users])
 
   if (users.length === 0) {
     return 'loading';
   }
-
+  
   return (
     // <div>
     //   <h1>Welcome to user-app!</h1>
@@ -39,18 +57,45 @@ function Users() {
     //   ))}
     // </div>
     
-    <div className="gutter-example">
+    // <div className="gutter-example" >
+    //   <center><h1>Welcome to user-app!</h1></center>
+    //   <Row type="flex" justify="start">
+    //     {
+    //       users.map(item=>(
+    //         <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }}>
+    //           <div className="gutter-box">
+    //             <User userId={item.id} />
+    //           </div>              
+    //         </Col>
+    //       ))
+    //     }
+    //   </Row>
+    // </div>
+    
+    <div className="gutter-example" >
+      <center><h1>Welcome to user-app!</h1></center>
+      {console.log('pagestate',pageState)}
+      {console.log('curr-users',currUsers)}
       <Row type="flex" justify="start">
-        {
-          users.map(item=>(
+        {/* {currUsers.length==0? "loading"
+          : */}
+          {
+          currUsers.map(item=>(
             <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }}>
               <div className="gutter-box">
-                <User userId={item.id} />
+                <p>{item.name}</p>
+                <p>{item.email}</p>
+                <p>{item.phone}</p>
+                <p>{item.website}</p>
               </div>              
             </Col>
           ))
         }
       </Row>
+      <br/>
+      <center>
+        <Pagination current={pageState} onChange={onChangePage} total={(users.length/userPerPage)*10} />
+      </center>
     </div>
   );
 }

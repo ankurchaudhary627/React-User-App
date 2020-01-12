@@ -25,7 +25,7 @@ function User({userId}){
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
+  
   const customPanelStyle = {
     background: '#f7f7f7',
     borderRadius: 4,
