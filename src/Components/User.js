@@ -79,16 +79,7 @@ function User({ user }) {
         {userDetail.length === 0 ? (
           <Modal visible={visible} onOk={handleOk} onCancel={handleCancel}>
             <Card style={{ width: 300, marginTop: 16 }}>
-              <Skeleton loading={loading} avatar active>
-                <Meta
-                  avatar={
-                    <Avatar
-                      src={`https://joeschmoe.io/api/v1/${userDetail.name}`}
-                    />
-                  }
-                  title={userDetail.name}
-                />
-              </Skeleton>
+              <Skeleton loading={loading} avatar active></Skeleton>
             </Card>
           </Modal>
         ) : (

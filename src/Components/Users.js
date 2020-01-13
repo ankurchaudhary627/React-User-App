@@ -92,11 +92,7 @@ function Users() {
         <h1>Welcome to user-app!</h1>
       </center>
       <br />
-      <Row
-        type='flex'
-        justify='start'
-        style={{ display: 'flex', flexDirection: 'column' }}
-      >
+      <Row type='flex' justify='start' style={{ display: 'flex' }}>
         {currUsers.map(item => (
           <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }}>
             <div className='gutter-box'>
