@@ -23,10 +23,7 @@ function Users() {
   const [users, setusers] = useState([]);
   const [pageState, setpageState] = useState(1);
   const [currUsers, setcurrUsers] = useState([]);
-  const [visible, setvisible] = useState(false);
-
-  console.log('users', users);
-  console.log('curr users', currUsers);
+  const [displaySize, setdisplaySize] = useState(false);
 
   async function fetchData() {
     await axios
@@ -34,7 +31,7 @@ function Users() {
       .then(res => setusers(res.data))
       .catch(err => console.log(err));
   }
-
+  console.log('screen size', displaySize);
   function onChangePage(page) {
     console.log(page);
     setpageState(page);
@@ -48,6 +45,15 @@ function Users() {
   }, []);
 
   useEffect(() => {
+    window.addEventListener('resize', resize.bind(this));
+    resize();
+  }, []);
+
+  function resize() {
+    setdisplaySize(window.innerWidth <= 760);
+  }
+
+  useEffect(() => {
     setcurrUsers(users.slice(0, 3));
   }, [users]);
 
@@ -58,7 +64,6 @@ function Users() {
       </Spin>
     );
   }
-
   return (
     // <div>
     //   <h1>Welcome to user-app!</h1>
@@ -92,12 +97,17 @@ function Users() {
         <h1>Welcome to user-app!</h1>
       </center>
       <br />
-      <Row type='flex' justify='start' style={{ display: 'flex' }}>
+      <Row
+        type='flex'
+        justify='start'
+        style={{ display: 'flex', flexDirection: displaySize ? 'column' : '' }}
+      >
         {currUsers.map(item => (
           <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }}>
             <div className='gutter-box'>
               <User user={item} />
             </div>
+            <br />
           </Col>
         ))}
       </Row>

@@ -36,22 +36,6 @@ function User({ user }) {
   function handleCancel(event) {
     setvisible(false);
   }
-
-  if (userDetail.length === 0) {
-    console.log('still empty details', userDetail);
-  }
-  if (userDetail.length !== 0) {
-    console.log(' details', userDetail);
-  }
-
-  const customPanelStyle = {
-    background: '#f7f7f7',
-    borderRadius: 4,
-    marginBottom: 24,
-    border: 0,
-    overflow: 'hidden'
-  };
-
   return (
     <Card
       title={user.name}
