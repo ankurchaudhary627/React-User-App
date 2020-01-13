@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import User from './User';
 import { Spin, Alert } from 'antd';
-import { Row, Col, Card } from 'antd';
+import { Row, Col } from 'antd';
 import { Pagination } from 'antd';
 import 'antd/dist/antd.css';
 
