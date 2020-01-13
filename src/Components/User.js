@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
-import { Collapse, Card, Icon, Button, Modal, Avatar, Skeleton } from 'antd';
+import { Card, Icon, Button, Modal, Avatar, Skeleton } from 'antd';
 import 'antd/dist/antd.css';
-import UserDetails from './UserDetails';
 
-const { Panel } = Collapse;
 const { Meta } = Card;
 
 function User({ user }) {
@@ -20,20 +18,16 @@ function User({ user }) {
       .catch(err => console.log(err));
   }
 
-  function onChange(checked) {
-    setloading(!checked);
-  }
-
   function showModal() {
     fetchData();
     setvisible(true);
   }
 
-  function handleOk(event) {
+  function handleOk() {
     setvisible(false);
   }
 
-  function handleCancel(event) {
+  function handleCancel() {
     setvisible(false);
   }
   return (
@@ -103,35 +97,3 @@ function User({ user }) {
 }
 
 export default User;
-
-// <Modal visible={visible} onOk={handleOk} onCancel={handleCancel}>
-//   <Card style={{ width: 300, marginTop: 16 }}>
-//     {/* <Skeleton loading={loading} avatar active> */}
-//     <Meta
-//       avatar={
-//         <Avatar
-//           src={`https://joeschmoe.io/api/v1/${userDetail.name}`}
-//         />
-//       }
-//       title={userDetail.name}
-//     />
-//     <br />
-//     <p>
-//       <Icon type='mail' /> {userDetail?.email}
-//     </p>
-//     <p>
-//       <Icon type='user' /> {userDetail?.username}
-//     </p>
-//     <p>
-//       <Icon type='phone' /> {userDetail?.phone}
-//     </p>
-//     <p>
-//       <Icon type='idcard' />{' '}
-//       {`${userDetail?.address?.street}, ${userDetail?.address?.suite}, ${userDetail?.address?.city}`}
-//     </p>
-//     <p>
-//       <Icon type='bank' /> {userDetail?.website}
-//     </p>
-//     {/* </Skeleton> */}
-//   </Card>
-// </Modal>

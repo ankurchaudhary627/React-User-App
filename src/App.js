@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
 import Users from './Components/Users';
-// import Layout from './Components/Layout/Layout';
 import { Layout, Menu, Breadcrumb } from 'antd';
 const { Header, Content, Footer } = Layout;
 
@@ -51,23 +50,6 @@ function App() {
         </Footer>
       </Layout>
     </BrowserRouter>
-
-    // <BrowserRouter>
-    //   <Layout>
-    //     <Switch>
-    // <Route
-    //   exact
-    //   path='/'
-    //   render={() => (
-    //     <div>
-    //       <center>Home</center>
-    //     </div>
-    //   )}
-    // />
-    // <Route path='/users' render={() => <Users />} />
-    //     </Switch>
-    //   </Layout>
-    // </BrowserRouter>
   );
 }
 

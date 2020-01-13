@@ -2,19 +2,9 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import User from './User';
 import { Spin, Alert } from 'antd';
-import {
-  BrowserRouter,
-  Switch,
-  Route,
-  useHistory,
-  withRouter,
-  Link
-} from 'react-router-dom';
-import { Row, Col, Card, Button, Icon } from 'antd';
-import { Pagination, Modal } from 'antd';
+import { Row, Col, Card } from 'antd';
+import { Pagination } from 'antd';
 import 'antd/dist/antd.css';
-
-const { Meta } = Card;
 
 const USERS_URL = 'https://jsonplaceholder.typicode.com/users';
 
@@ -31,7 +21,7 @@ function Users() {
       .then(res => setusers(res.data))
       .catch(err => console.log(err));
   }
-  console.log('screen size', displaySize);
+
   function onChangePage(page) {
     console.log(page);
     setpageState(page);
@@ -65,33 +55,6 @@ function Users() {
     );
   }
   return (
-    // <div>
-    //   <h1>Welcome to user-app!</h1>
-    //   {/* <MenuList>
-    //     {users.map(item => (
-    //       <User userId={item.id} />
-    //     ))}
-    //   </MenuList> */}
-    //   {users.map(item=>(
-    //     <User userId={item.id} />
-    //   ))}
-    // </div>
-
-    // <div className="gutter-example" >
-    //   <center><h1>Welcome to user-app!</h1></center>
-    //   <Row type="flex" justify="start">
-    //     {
-    //       users.map(item=>(
-    //         <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }}>
-    //           <div className="gutter-box">
-    //             <User userId={item.id} />
-    //           </div>
-    //         </Col>
-    //       ))
-    //     }
-    //   </Row>
-    // </div>
-
     <div className='gutter-example'>
       <center>
         <h1>Welcome to user-app!</h1>
